@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const port = 3000; // Setting port to 3000 explicitly
+const port = process.env.PORT || 3000; // Setting port to 3000 explicitly
 
 app.get('/api/hello', async (req, res) => {
     let visitorName = req.query.visitor_name || 'Guest';
@@ -44,6 +44,6 @@ app.get('/api/hello', async (req, res) => {
     }
 });
 
-app.listen(port, '127.0.0.1', () => {
+app.listen(port,  () => {
     console.log(`Server is running on http://127.0.0.1:${port}`);
 });
