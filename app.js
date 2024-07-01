@@ -2,7 +2,12 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000; // Setting port to 3000 explicitly
-
+app.get("/",(req,res)=> {
+    res.json({
+        "code": 200,
+        "message" : "active"
+    })
+})
 app.get('/api/hello', async (req, res) => {
     let visitorName = req.query.visitor_name || 'Guest';
     visitorName = visitorName.replace(/['"]/g, '').trim()
@@ -43,12 +48,7 @@ app.get('/api/hello', async (req, res) => {
         res.status(500).json({ error: 'Unable to fetch data' });
     }
 });
-app.get("*",(req,res)=> {
-    res.json({
-        "code": 200,
-        "message" : "active"
-    })
-})
+
 app.listen(port,  () => {
     console.log(`Server is running on http://127.0.0.1:${port}`);
 });
