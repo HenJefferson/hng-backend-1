@@ -2,17 +2,17 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000; // Setting port to 3000 explicitly
-app.get("/",(req,res)=> {
+app.get("/", (req, res) => {
     res.json({
         "code": 200,
-        "message" : "active"
+        "message": "active"
     })
 })
 app.get('/api/hello', async (req, res) => {
     let visitorName = req.query.visitor_name || 'Guest';
     visitorName = visitorName.replace(/['"]/g, '').trim()
     let clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    
+
     // Adjust IP address format if needed (strip IPv6 prefix)
     if (clientIp.includes(':')) {
         clientIp = clientIp.split(':').pop();
@@ -49,6 +49,8 @@ app.get('/api/hello', async (req, res) => {
     }
 });
 
-app.listen(port,  () => {
+app.listen(port, () => {
     console.log(`Server is running on http://127.0.0.1:${port}`);
 });
+
+module.exports = app
